@@ -11,6 +11,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _coolDownTime;
     [SerializeField] private WeaponProperties _weaponProperties;
     [SerializeField] private SpriteRenderer _sprite;
+
+    [SerializeField] private GameObject lookTest;
+
     private bool canFire = true;
     
     void Awake()
@@ -46,6 +49,18 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
             direction = (hitInfo.point - new Vector3(transform.position.x, hitInfo.point.y, transform.position.z)).normalized;
+
+            var lastPos = lookTest.transform.position;
+            var lastRotation = lookTest.transform.rotation;
+
+            lookTest.transform.LookAt(hitInfo.point - new Vector3(transform.position.x, hitInfo.point.y, transform.position.z));
+
+            var mousePos = Input.mousePosition;
+
+            var startPos = new Vector3(0, 1, 0);
+
+            Debug.Log(new Vector3(Screen.width / 2  - mousePos.x, Screen.height / 2 - mousePos.y));
+
 
             var position = new Vector3(transform.position.x, 0, transform.position.z);
 
