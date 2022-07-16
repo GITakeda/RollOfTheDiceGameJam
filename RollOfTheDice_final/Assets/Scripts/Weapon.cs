@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private WeaponProperties _weaponProperties;
     [SerializeField] private SpriteRenderer _sprite;
 
-    [SerializeField] private GameObject lookTest;
+    [SerializeField] private GameObject center;
 
     private bool canFire = true;
     
@@ -50,21 +50,20 @@ public class Weapon : MonoBehaviour
         {
             direction = (hitInfo.point - new Vector3(transform.position.x, hitInfo.point.y, transform.position.z)).normalized;
 
-            var lastPos = lookTest.transform.position;
-            var lastRotation = lookTest.transform.rotation;
-
-            lookTest.transform.LookAt(hitInfo.point - new Vector3(transform.position.x, hitInfo.point.y, transform.position.z));
-
             var mousePos = Input.mousePosition;
 
-            var startPos = new Vector3(0, 1, 0);
+            var playerPosition = Camera.main.WorldToScreenPoint(center.transform.position);
 
-            Debug.Log(new Vector3(Screen.width / 2  - mousePos.x, Screen.height / 2 - mousePos.y));
-
+            var lookDirectionPlayer = new Vector3(mousePos.x - playerPosition.x, mousePos.y - playerPosition.y);
 
             var position = new Vector3(transform.position.x, 0, transform.position.z);
 
-            projectile.StartProjectile(new Vector2(direction.x, direction.z), position, _weaponProperties.projectileSprite, _weaponProperties.damageType, _weaponProperties.projectileVelocity);
+            projectile.StartProjectile(new Vector2(direction.x, direction.z), 
+                position, 
+                _weaponProperties.projectileSprite, 
+                _weaponProperties.damageType, 
+                _weaponProperties.projectileVelocity,
+                lookDirectionPlayer);
         }
     }
 

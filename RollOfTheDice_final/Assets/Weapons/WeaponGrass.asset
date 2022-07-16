@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: WeaponGrass
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 21300000, guid: f2172a6768c3976499624a74ccbb336c, type: 3}
-  projectileSprite: {fileID: 21300000, guid: f2172a6768c3976499624a74ccbb336c, type: 3}
+  projectileSprite: {fileID: 21300000, guid: cc445a2a5fc6dfc4eadad4bc1badfd80, type: 3}
   faceSprite: {fileID: 21300000, guid: e7c06f3a5ec24c84eae8d8ab8f27ca71, type: 3}
-  coolDown: 0.5
-  projectileVelocity: 10
+  faceIndicatorUI: {fileID: 21300000, guid: 585d000baa93c7c43ab22ff453c01839, type: 3}
+  coolDown: 0.2
+  projectileVelocity: 8
   damageType: 2

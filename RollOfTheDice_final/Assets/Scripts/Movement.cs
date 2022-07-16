@@ -41,6 +41,8 @@ public class Movement : MonoBehaviour
     {
         CalculateFaceOffset();
         CalculateWeaponOffset();
+
+        this.transform.position = new Vector3(_startingPosition.x, 0, _startingPosition.y);
     }
 
     private void FixedUpdate()

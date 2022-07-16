@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private Rigidbody enemyRigidbody;
     [SerializeField] private float velocity = 1;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private int startingLifePoints = 3;
@@ -30,7 +30,17 @@ public class Enemy : MonoBehaviour
         var newDirection = player.transform.position - transform.position;
         newDirection = newDirection.normalized;
         direction = new Vector3(newDirection.x, 0, newDirection.z);
-        rigidbody.velocity = velocity * direction;
+        enemyRigidbody.velocity = velocity * direction;
+    }
+
+    public void StartEnemy(DamageType damageType, DamageType weakDamageType, int lifePoints, float speed, Sprite sprite)
+    {
+        this.sprite.sprite = sprite;
+        this.damageType = damageType;
+        this.weakDamageType = weakDamageType;
+        this.startingLifePoints = lifePoints;
+        this.velocity = speed;
+        this.lifePoints = lifePoints;
     }
 
     public void ResetPosition()
@@ -56,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        lifePoints = 3;
+        lifePoints = startingLifePoints;
         enemyObjectPool.PutEnemy(this.gameObject);
     }
 

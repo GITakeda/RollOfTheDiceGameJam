@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: WeaponFire
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 21300000, guid: 82652b5b60842d946a04e69f31640b27, type: 3}
-  projectileSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  projectileSprite: {fileID: 21300000, guid: cc445a2a5fc6dfc4eadad4bc1badfd80, type: 3}
   faceSprite: {fileID: 21300000, guid: d932fed10acd9614b83e3a059b9448ae, type: 3}
+  faceIndicatorUI: {fileID: 21300000, guid: c0c25b44ef317b34697d762444178442, type: 3}
   coolDown: 0.2
   projectileVelocity: 8
   damageType: 0

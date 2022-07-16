@@ -13,10 +13,16 @@ public class EnemySpawner : MonoBehaviour
     private GameObject enemyPrefab;
 
     [SerializeField]
+    private EnemyProperties[] properties;
+
+    [SerializeField]
     private float spawnDelayMin;
 
     [SerializeField]
     private float spawnDelayMax;
+
+    [SerializeField]
+    private Transform[] spawnPoints;
 
     public void Awake()
     {
@@ -37,7 +43,11 @@ public class EnemySpawner : MonoBehaviour
 
         var enemy = gameObject.GetComponent<Enemy>();
 
-        enemy.SetPosition(this.transform.position);
+        var enemyProperties = properties[UnityEngine.Random.Range(0, properties.Length)];
+
+        enemy.StartEnemy(enemyProperties.damageType, enemyProperties.weakDamageType, enemyProperties.lifePoints, enemyProperties.speed, enemyProperties.enemySprite);
+
+        enemy.SetPosition(spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)].position);
        
         Invoke("SpawnEnemy", UnityEngine.Random.Range(spawnDelayMin, spawnDelayMax));
     }
