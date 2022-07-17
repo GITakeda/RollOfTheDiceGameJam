@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Vector3 _handOffset;
 
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private GameObject _weaponSprite;
     [SerializeField] private Vector3 _weaponOffset;
     [SerializeField] private DiceFace[] _faces;
     [SerializeField] private FaceType faceType;
@@ -145,7 +146,8 @@ public class Movement : MonoBehaviour
 
     private void CalculateWeaponOffset()
     {
-        _weapon.transform.position = transform.position + _weaponOffset;
+        _weapon.transform.position = transform.position + _handOffset;
+        _weaponSprite.transform.position = transform.position + _weaponOffset;
     }
 
     private void CalculateHandOffset()

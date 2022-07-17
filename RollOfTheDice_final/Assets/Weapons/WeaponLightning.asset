@@ -19,3 +19,4 @@ MonoBehaviour:
   coolDown: 0.2
   projectileVelocity: 8
   damageType: 3
+  firePositionOffset: {x: 0, y: 0}

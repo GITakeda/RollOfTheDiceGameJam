@@ -19,7 +19,8 @@ public class WeaponProperties : ScriptableObject
 
     public DamageType damageType;
 
-    
+    public Vector2 firePositionOffset;
+
 }
 
 public enum DamageType
