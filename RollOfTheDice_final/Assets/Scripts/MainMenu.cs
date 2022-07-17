@@ -13,4 +13,19 @@ public class MainMenu : MonoBehaviour
     {
         GameController.GetGameController().Exit();
     }
+
+    public void LoadTutorial1()
+    {
+        GameController.GetGameController().ToTutorial1();
+    }
+
+    public void LoadTutorial2()
+    {
+        GameController.GetGameController().ToTutorial2();
+    }
+
+    public void StartMenu()
+    {
+        GameController.GetGameController().End(0);
+    }
 }

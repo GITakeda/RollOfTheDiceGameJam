@@ -24,6 +24,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private Transform[] spawnPoints;
 
+    [SerializeField]
+    private Player player;
+
+    public int fase = 0;
+
     public void Awake()
     {
         Invoke("SpawnEnemy", spawnDelayMin);
@@ -48,7 +53,22 @@ public class EnemySpawner : MonoBehaviour
         enemy.StartEnemy(enemyProperties.damageType, enemyProperties.weakDamageType, enemyProperties.lifePoints, enemyProperties.speed, enemyProperties.enemySprite);
 
         enemy.SetPosition(spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)].position);
-       
+
+
+        if (player.points > 150 && fase == 0)
+        {
+            fase++;
+            spawnDelayMax /= 2;
+            spawnDelayMin /= 1.5f;
+        }
+
+        if(player.points > 500 && fase == 1)
+        {
+            fase++;
+            spawnDelayMax /= 2;
+            spawnDelayMin /= 1.5f;
+        }
+
         Invoke("SpawnEnemy", UnityEngine.Random.Range(spawnDelayMin, spawnDelayMax));
     }
 }

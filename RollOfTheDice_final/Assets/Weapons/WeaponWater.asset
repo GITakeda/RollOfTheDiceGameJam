@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponSprite: {fileID: 21300000, guid: fbf74dbc214f07d4d9821efdc72b2a17, type: 3}
   projectileSprite: {fileID: 21300000, guid: 0bf46a92dd884ae4ebd0ec4aa47b9a56, type: 3}
   faceSprite: {fileID: 21300000, guid: dc3576ce94fe3644d8924ad9a705481e, type: 3}
-  faceIndicatorUI: {fileID: 21300000, guid: 40a71e1702b07c14785083d462895b5e, type: 3}
+  faceIndicatorUI: {fileID: 21300000, guid: ea9bac315a8f5fa4eaa3f4a1cabfb33a, type: 3}
   coolDown: 0.2
   projectileVelocity: 8
   damageType: 1

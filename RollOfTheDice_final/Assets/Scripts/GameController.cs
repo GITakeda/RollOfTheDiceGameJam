@@ -46,7 +46,16 @@ public class GameController : MonoBehaviour
 
     public void Exit()
     {
-        Debug.Log("Exit");
         Application.Quit();
+    }
+
+    public void ToTutorial1()
+    {
+        SceneManager.LoadScene("Tutorial_1");
+    }
+
+    public void ToTutorial2()
+    {
+        SceneManager.LoadScene("Tutorial_2");
     }
 }

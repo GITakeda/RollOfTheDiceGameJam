@@ -44,13 +44,15 @@ public class Enemy : MonoBehaviour
         this.startingLifePoints = lifePoints;
         this.velocity = speed;
         this.lifePoints = lifePoints;
-        //    dyingAnimation.enabled = false;
-        //    collider.enabled = false;
+        dyingAnimation.enabled = false;
+        collider.enabled = true;
     }
 
     public void ResetPosition()
     {
         this.transform.position = new Vector3(0, 0, 0);
+        this.sprite.transform.rotation = Quaternion.identity;
+        this.sprite.transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void SetPosition(Vector3 newPosition)
@@ -65,7 +67,7 @@ public class Enemy : MonoBehaviour
 
         if(lifePoints <= 0)
         {
-            Die();
+            StartDying();
         }
     }
 
@@ -80,12 +82,12 @@ public class Enemy : MonoBehaviour
         enemyObjectPool.PutEnemy(this.gameObject);
     }
 
-    //private void StartDying()
-    //{
-    //    lifePoints = 0;
-    //    dyingAnimation.enabled = false;
-    //    collider.enabled = false;
-    //}
+    private void StartDying()
+    {
+        lifePoints = 0;
+        dyingAnimation.enabled = true;
+        collider.enabled = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
