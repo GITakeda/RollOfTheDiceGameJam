@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
 
     public void Exit()
     {
+        Debug.Log("Exit");
         Application.Quit();
     }
 }
