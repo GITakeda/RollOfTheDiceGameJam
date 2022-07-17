@@ -130,8 +130,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.64, y: 4.2187486, z: 0.8421718}
-  m_Center: {x: 0, y: 1.0043746, z: 0.32108593}
+  m_Size: {x: 2.9170177, y: 4.2187486, z: 2.0706906}
+  m_Center: {x: -0.13850698, y: 1.0043746, z: 0.26358223}
 --- !u!54 &8789270730341853782
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -165,5 +165,6 @@ MonoBehaviour:
   sprite: {fileID: 8789270729370027801}
   startingLifePoints: 3
   projectileTag: Projectile
+  playerTag: Player
   damageType: 0
   weakDamageType: 1

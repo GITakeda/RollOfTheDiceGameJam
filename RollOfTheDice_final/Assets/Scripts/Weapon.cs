@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
             var lookDirectionPlayer = new Vector3(mousePos.x - playerPosition.x, mousePos.y - playerPosition.y);
 
             var position = new Vector3(transform.position.x, 0, transform.position.z);
-
+            
             projectile.StartProjectile(new Vector2(direction.x, direction.z), 
                 position, 
                 _weaponProperties.projectileSprite, 

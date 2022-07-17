@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponLightning
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 21300000, guid: 82652b5b60842d946a04e69f31640b27, type: 3}
-  projectileSprite: {fileID: 21300000, guid: cc445a2a5fc6dfc4eadad4bc1badfd80, type: 3}
+  projectileSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   faceSprite: {fileID: 21300000, guid: 95d6bc9042866b34487c226fe4a2372f, type: 3}
   faceIndicatorUI: {fileID: 21300000, guid: a51964eda6e7e814fa91a6f3ff51dd35, type: 3}
   coolDown: 0.2

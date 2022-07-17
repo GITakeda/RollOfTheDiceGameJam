@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private int startingLifePoints = 3;
     [SerializeField] private string projectileTag;
+    [SerializeField] private string playerTag;
     [SerializeField] private DamageType damageType;
     [SerializeField] private DamageType weakDamageType;
     private EnemyObjectPool enemyObjectPool;
@@ -64,6 +65,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void DoDamage()
+    {
+        TakeDamage(lifePoints);
+    }
+
     private void Die()
     {
         lifePoints = startingLifePoints;
@@ -72,21 +78,28 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == projectileTag)
+        if (other.tag == projectileTag)
         {
             var projectile = other.GetComponent<Projectile>();
 
-            if(projectile.GetDamageType() == damageType)
+            if (projectile.GetDamageType() == damageType)
             {
                 TakeDamage(0);
-            } else if(projectile.GetDamageType() == weakDamageType)
-            {
-                TakeDamage(2);
             }
-            else
+            else if (projectile.GetDamageType() == weakDamageType)
             {
-                TakeDamage(1);
+                TakeDamage(lifePoints);
             }
+            //else
+            //{
+            //    TakeDamage(1);
+            //}
+        }
+        else if (other.tag == playerTag) 
+        {
+            DoDamage();
+            var playerHit = other.GetComponent<Player>();
+            playerHit.TakeDamage(1);
         }
     }
 }

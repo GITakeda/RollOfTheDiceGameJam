@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b758d74af1127a14da037c00b2e746c1, type: 3}
   m_Name: WeaponWater
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: 21300000, guid: 82652b5b60842d946a04e69f31640b27, type: 3}
-  projectileSprite: {fileID: 21300000, guid: cc445a2a5fc6dfc4eadad4bc1badfd80, type: 3}
+  weaponSprite: {fileID: 21300000, guid: fbf74dbc214f07d4d9821efdc72b2a17, type: 3}
+  projectileSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   faceSprite: {fileID: 21300000, guid: dc3576ce94fe3644d8924ad9a705481e, type: 3}
   faceIndicatorUI: {fileID: 21300000, guid: 40a71e1702b07c14785083d462895b5e, type: 3}
   coolDown: 0.2

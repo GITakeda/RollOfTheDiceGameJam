@@ -54,6 +54,8 @@ public class Movement : MonoBehaviour
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) Assemble(Vector3.forward);
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) Assemble(Vector3.back);
 
+        //var playerPosition = Camera.main.WorldToScreenPoint(transform.position);
+
         void Assemble(Vector3 dir)
         {
             var anchor = transform.position + (Vector3.down + dir) * 0.5f;
