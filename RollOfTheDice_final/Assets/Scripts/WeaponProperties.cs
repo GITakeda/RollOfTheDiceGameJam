@@ -11,13 +11,16 @@ public class WeaponProperties : ScriptableObject
 
     public Sprite faceSprite;
 
+    public Sprite faceIndicatorUI;
+
     public float coolDown;
 
     public float projectileVelocity;
 
     public DamageType damageType;
 
-    
+    public Vector2 firePositionOffset;
+
 }
 
 public enum DamageType

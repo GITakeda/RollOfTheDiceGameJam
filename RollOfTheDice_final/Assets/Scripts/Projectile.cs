@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _sprite;
     [SerializeField]
+    private GameObject spriteAnchor;
+    [SerializeField]
     private DamageType _damageType;
 
     private ProjectileObjectPool projectilePool;
@@ -24,11 +26,13 @@ public class Projectile : MonoBehaviour
     
     void FixedUpdate()
     {
-        transform.Translate(new Vector3(_direction.x, 0, _direction.y) * Time.deltaTime * _velocity);
+        transform.Translate(new Vector3(_direction.normalized.x, 0, _direction.normalized.y) * Time.deltaTime * _velocity);
     }
 
-    public void StartProjectile(Vector2 newDirection, Vector3 newPosition, Sprite sprite, DamageType damageType, float velocity)
+    public void StartProjectile(Vector2 newDirection, Vector3 newPosition, Sprite sprite, DamageType damageType, float velocity, Vector3 lookDirection)
     {
+        this.transform.position = new Vector3(0, 0, 0);
+        spriteAnchor.gameObject.transform.LookAt(lookDirection);
         SetPosition(newPosition);
         SetDirection(newDirection);
         SetSprite(sprite);
@@ -65,5 +69,10 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         projectilePool.PutProjectile(gameObject);
+    }
+
+    public DamageType GetDamageType()
+    {
+        return _damageType;
     }
 }

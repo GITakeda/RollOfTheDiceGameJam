@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Vector3 _handOffset;
 
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private GameObject _weaponSprite;
     [SerializeField] private Vector3 _weaponOffset;
     [SerializeField] private DiceFace[] _faces;
     [SerializeField] private FaceType faceType;
@@ -37,10 +38,16 @@ public class Movement : MonoBehaviour
 
     private bool _isMoving;
 
+    private Vector3 lastDir;
+
     private void Awake()
     {
         CalculateFaceOffset();
         CalculateWeaponOffset();
+        CalculateHandOffset();
+        CheckFaces();
+
+        this.transform.position = new Vector3(_startingPosition.x, 0, _startingPosition.y);
     }
 
     private void FixedUpdate()
@@ -51,13 +58,14 @@ public class Movement : MonoBehaviour
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) Assemble(Vector3.right);
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) Assemble(Vector3.forward);
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) Assemble(Vector3.back);
+    }
 
-        void Assemble(Vector3 dir)
-        {
-            var anchor = transform.position + (Vector3.down + dir) * 0.5f;
-            var axis = Vector3.Cross(Vector3.up, dir);
-            StartCoroutine(Roll(anchor, axis));
-        }
+    void Assemble(Vector3 dir)
+    {
+        var anchor = transform.position + (Vector3.down + dir) * 0.5f;
+        var axis = Vector3.Cross(Vector3.up, dir);
+        lastDir = dir;
+        StartCoroutine(Roll(anchor, axis));
     }
 
     private IEnumerator Roll(Vector3 anchor, Vector3 axis)
@@ -71,17 +79,36 @@ public class Movement : MonoBehaviour
             CalculateHandOffset();
             yield return new WaitForSeconds(0.01f);
         }
-        
+
+        var playerPos = Camera.main.WorldToScreenPoint(transform.position);
+
+        if (playerPos.x > Camera.main.pixelWidth || playerPos.x < 0 || playerPos.y > Camera.main.pixelHeight || playerPos.y < 0)
+        {
+            //this.transform.position = new Vector3(-transform.position.x, transform.position.y, -transform.position.z);
+            CheckFaces();
+            UpdateProperties();
+            Assemble(lastDir * -1);
+        }
+        else
+        {
+            CheckFaces();
+            UpdateProperties();
+            _isMoving = false;
+        }
+    }
+
+    private void CheckFaces()
+    {
         foreach (DiceFace face in _faces)
         {
-            if(face.transform.position.y > 0.4f)
+            if (face.transform.position.y > 0.4f)
             {
                 faceCur = face;
             }
 
             var facePositionRelativeToBody = this.transform.position - face.transform.position;
 
-            if(facePositionRelativeToBody.z > 0.4f)
+            if (facePositionRelativeToBody.z > 0.4f)
             {
                 faceUp = face;
             }
@@ -101,8 +128,8 @@ public class Movement : MonoBehaviour
                 faceLeft = face;
             }
         }
+
         UpdateProperties();
-        _isMoving = false;
     }
 
     private void UpdateProperties()
@@ -132,7 +159,8 @@ public class Movement : MonoBehaviour
 
     private void CalculateWeaponOffset()
     {
-        _weapon.transform.position = transform.position + _weaponOffset;
+        _weapon.transform.position = transform.position + _handOffset;
+        _weaponSprite.transform.position = transform.position + _weaponOffset;
     }
 
     private void CalculateHandOffset()

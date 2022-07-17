@@ -11,6 +11,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _coolDownTime;
     [SerializeField] private WeaponProperties _weaponProperties;
     [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] private Vector3 startingPosition;
+
+    [SerializeField] private GameObject center;
+
     private bool canFire = true;
     
     void Awake()
@@ -47,9 +51,20 @@ public class Weapon : MonoBehaviour
         {
             direction = (hitInfo.point - new Vector3(transform.position.x, hitInfo.point.y, transform.position.z)).normalized;
 
-            var position = new Vector3(transform.position.x, 0, transform.position.z);
+            var mousePos = Input.mousePosition;
 
-            projectile.StartProjectile(new Vector2(direction.x, direction.z), position, _weaponProperties.projectileSprite, _weaponProperties.damageType, _weaponProperties.projectileVelocity);
+            var playerPosition = Camera.main.WorldToScreenPoint(center.transform.position);
+
+            var lookDirectionPlayer = new Vector3(mousePos.x - playerPosition.x, mousePos.y - playerPosition.y);
+
+            var position = new Vector3(transform.position.x + _weaponProperties.firePositionOffset.x, 0, transform.position.z + _weaponProperties.firePositionOffset.y);
+            
+            projectile.StartProjectile(new Vector2(direction.x, direction.z), 
+                position, 
+                _weaponProperties.projectileSprite, 
+                _weaponProperties.damageType, 
+                _weaponProperties.projectileVelocity,
+                lookDirectionPlayer);
         }
     }
 
