@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
         GameController.GetGameController().StartGame();
     }
 
+    public void StartButton()
+    {
+        GameController.GetGameController().StartButton();
+    }
+
     public void Exit()
     {
         GameController.GetGameController().Exit();

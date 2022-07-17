@@ -10,6 +10,11 @@ public class GameController : MonoBehaviour
     private static GameController cur;
 
     public int lastPoints = 0;
+    public bool showTutorial = true;
+
+    private string highScoreMap = "HightScore";
+
+    private string hasSeenTheTutorialMap = "HasSeenTheTutorial";
 
     public static GameController GetGameController()
     {
@@ -27,11 +32,28 @@ public class GameController : MonoBehaviour
             cur = this;
             DontDestroyOnLoad(cur);
         }
+
+        showTutorial = PlayerPrefs.GetInt(hasSeenTheTutorialMap) == 0;
+        lastPoints = PlayerPrefs.GetInt(highScoreMap);
     }
 
     public void StartGame()
     {
         SceneManager.LoadScene("Game");
+        showTutorial = false;
+        PlayerPrefs.SetInt(hasSeenTheTutorialMap, 1);
+    }
+
+    public void StartButton()
+    {
+        if (showTutorial)
+        {
+            ToTutorial1();
+        }
+        else
+        {
+            StartGame();
+        }
     }
 
     public void End(int points)
@@ -39,6 +61,7 @@ public class GameController : MonoBehaviour
         if(points > lastPoints)
         {
             cur.lastPoints = points;
+            PlayerPrefs.SetInt(highScoreMap, cur.lastPoints);
         }
 
         SceneManager.LoadScene("MainMenu");

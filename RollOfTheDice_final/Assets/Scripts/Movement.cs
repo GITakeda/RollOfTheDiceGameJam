@@ -38,6 +38,8 @@ public class Movement : MonoBehaviour
 
     private bool _isMoving;
 
+    private Vector3 lastDir;
+
     private void Awake()
     {
         CalculateFaceOffset();
@@ -56,15 +58,14 @@ public class Movement : MonoBehaviour
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) Assemble(Vector3.right);
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) Assemble(Vector3.forward);
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) Assemble(Vector3.back);
+    }
 
-        //var playerPosition = Camera.main.WorldToScreenPoint(transform.position);
-
-        void Assemble(Vector3 dir)
-        {
-            var anchor = transform.position + (Vector3.down + dir) * 0.5f;
-            var axis = Vector3.Cross(Vector3.up, dir);
-            StartCoroutine(Roll(anchor, axis));
-        }
+    void Assemble(Vector3 dir)
+    {
+        var anchor = transform.position + (Vector3.down + dir) * 0.5f;
+        var axis = Vector3.Cross(Vector3.up, dir);
+        lastDir = dir;
+        StartCoroutine(Roll(anchor, axis));
     }
 
     private IEnumerator Roll(Vector3 anchor, Vector3 axis)
@@ -79,9 +80,21 @@ public class Movement : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        CheckFaces();
-        UpdateProperties();
-        _isMoving = false;
+        var playerPos = Camera.main.WorldToScreenPoint(transform.position);
+
+        if (playerPos.x > Camera.main.pixelWidth || playerPos.x < 0 || playerPos.y > Camera.main.pixelHeight || playerPos.y < 0)
+        {
+            //this.transform.position = new Vector3(-transform.position.x, transform.position.y, -transform.position.z);
+            CheckFaces();
+            UpdateProperties();
+            Assemble(lastDir * -1);
+        }
+        else
+        {
+            CheckFaces();
+            UpdateProperties();
+            _isMoving = false;
+        }
     }
 
     private void CheckFaces()
