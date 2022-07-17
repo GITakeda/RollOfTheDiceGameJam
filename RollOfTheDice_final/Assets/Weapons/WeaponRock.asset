@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b758d74af1127a14da037c00b2e746c1, type: 3}
   m_Name: WeaponRock
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: 21300000, guid: 82652b5b60842d946a04e69f31640b27, type: 3}
-  projectileSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  weaponSprite: {fileID: 21300000, guid: 6ef541603ac7fb7428c19c992feb143e, type: 3}
+  projectileSprite: {fileID: 21300000, guid: 08b853b32392f764aafb3b3503ba63aa, type: 3}
   faceSprite: {fileID: 21300000, guid: 2eeb55a3e5ec66941a6217fb570166ad, type: 3}
   faceIndicatorUI: {fileID: 21300000, guid: aa54467f14fa8d5438130409a0cefa3b, type: 3}
   coolDown: 0.2

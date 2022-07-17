@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponGrass
   m_EditorClassIdentifier: 
   weaponSprite: {fileID: 21300000, guid: a1a633f58457cb245a91d5aaca5e8aa9, type: 3}
-  projectileSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  projectileSprite: {fileID: 21300000, guid: 88a97bb22d0ec5a4284c85abe6466253, type: 3}
   faceSprite: {fileID: 21300000, guid: e7c06f3a5ec24c84eae8d8ab8f27ca71, type: 3}
   faceIndicatorUI: {fileID: 21300000, guid: 585d000baa93c7c43ab22ff453c01839, type: 3}
   coolDown: 0.2

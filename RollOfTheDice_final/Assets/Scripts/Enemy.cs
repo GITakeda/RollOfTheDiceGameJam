@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string playerTag;
     [SerializeField] private DamageType damageType;
     [SerializeField] private DamageType weakDamageType;
+    [SerializeField] private Collider collider;
+    [SerializeField] private Animator dyingAnimation;
     private EnemyObjectPool enemyObjectPool;
     private Vector3 direction = new Vector3(0, 0, 0);
     private Movement player;
@@ -42,6 +44,8 @@ public class Enemy : MonoBehaviour
         this.startingLifePoints = lifePoints;
         this.velocity = speed;
         this.lifePoints = lifePoints;
+        //    dyingAnimation.enabled = false;
+        //    collider.enabled = false;
     }
 
     public void ResetPosition()
@@ -72,9 +76,16 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        lifePoints = startingLifePoints;
+        lifePoints = 0;
         enemyObjectPool.PutEnemy(this.gameObject);
     }
+
+    //private void StartDying()
+    //{
+    //    lifePoints = 0;
+    //    dyingAnimation.enabled = false;
+    //    collider.enabled = false;
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -90,10 +101,6 @@ public class Enemy : MonoBehaviour
             {
                 TakeDamage(lifePoints);
             }
-            //else
-            //{
-            //    TakeDamage(1);
-            //}
         }
         else if (other.tag == playerTag) 
         {

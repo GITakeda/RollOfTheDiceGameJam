@@ -41,6 +41,8 @@ public class Movement : MonoBehaviour
     {
         CalculateFaceOffset();
         CalculateWeaponOffset();
+        CalculateHandOffset();
+        CheckFaces();
 
         this.transform.position = new Vector3(_startingPosition.x, 0, _startingPosition.y);
     }
@@ -75,17 +77,24 @@ public class Movement : MonoBehaviour
             CalculateHandOffset();
             yield return new WaitForSeconds(0.01f);
         }
-        
+
+        CheckFaces();
+        UpdateProperties();
+        _isMoving = false;
+    }
+
+    private void CheckFaces()
+    {
         foreach (DiceFace face in _faces)
         {
-            if(face.transform.position.y > 0.4f)
+            if (face.transform.position.y > 0.4f)
             {
                 faceCur = face;
             }
 
             var facePositionRelativeToBody = this.transform.position - face.transform.position;
 
-            if(facePositionRelativeToBody.z > 0.4f)
+            if (facePositionRelativeToBody.z > 0.4f)
             {
                 faceUp = face;
             }
@@ -105,8 +114,8 @@ public class Movement : MonoBehaviour
                 faceLeft = face;
             }
         }
+
         UpdateProperties();
-        _isMoving = false;
     }
 
     private void UpdateProperties()

@@ -1,22 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField]
     private Player player;
 
-    private void FixedUpdate()
+    private static GameController cur;
+
+    public int lastPoints = 0;
+
+    public static GameController GetGameController()
     {
-        if (player.isDead)
+        return cur;
+    }
+
+    private void Awake()
+    {
+        if (cur != null)
         {
-            PlayerDied();
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            cur = this;
+            DontDestroyOnLoad(cur);
         }
     }
 
-    public void PlayerDied()
+    public void StartGame()
     {
-        Debug.Log("Game ended");
+        SceneManager.LoadScene("Game");
+    }
+
+    public void End(int points)
+    {
+        if(points > lastPoints)
+        {
+            cur.lastPoints = points;
+        }
+
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
